@@ -10,17 +10,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #06b6d4;
-            --primary-dark: #0891b2;
+            --primary: #10b981;
+            --primary-dark: #059669;
             --secondary: #8b5cf6;
-            --success: #10b981;
             --warning: #f59e0b;
+            --danger: #ef4444;
             --bg-dark: #0f0f23;
             --bg-card: rgba(255, 255, 255, 0.05);
             --text: #fff;
             --text-muted: #94a3b8;
             --border: rgba(255, 255, 255, 0.1);
-            --glow: rgba(6, 182, 212, 0.5);
         }
 
         * {
@@ -39,7 +38,7 @@
         .bg-gradient {
             position: fixed;
             inset: 0;
-            background: radial-gradient(ellipse at 20% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            background: radial-gradient(ellipse at 30% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 50%);
             z-index: -1;
         }
 
@@ -49,7 +48,6 @@
             align-items: center;
             padding: 1.5rem 2rem;
             background: var(--bg-card);
-            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
         }
 
@@ -66,74 +64,59 @@
         }
 
         .logo span {
-            background: linear-gradient(135deg, var(--primary), #22d3ee);
+            background: linear-gradient(135deg, var(--primary), #34d399);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        .hero {
-            text-align: center;
-            padding: 2rem 0 3rem;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 0.75rem;
-        }
-
-        .hero p {
-            color: var(--text-muted);
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
         }
 
         .card {
             background: var(--bg-card);
-            backdrop-filter: blur(20px);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 2rem;
+            padding: 1.5rem;
+        }
+
+        .card h3 {
             margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .card h3 i {
+            color: var(--primary);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .form-group label {
-            display: block;
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 0.5rem;
-            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text);
-            font-size: 1rem;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
+        .form-group label span {
+            color: var(--text-muted);
         }
 
         .char-count {
             font-size: 0.8rem;
-            color: var(--text-muted);
-            text-align: right;
-            margin-top: 0.25rem;
         }
 
         .char-count.warning {
@@ -141,30 +124,46 @@
         }
 
         .char-count.danger {
-            color: #ef4444;
+            color: var(--danger);
         }
 
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+        .char-count.good {
+            color: var(--primary);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            box-shadow: 0 4px 20px var(--glow);
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.85rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text);
+            font-size: 0.95rem;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s, background 0.3s;
         }
 
         .preview-section {
@@ -173,82 +172,241 @@
 
         .preview-card {
             background: #fff;
-            color: #000;
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 1.25rem;
+            color: #1a1a2e;
         }
 
-        .preview-title {
+        .preview-label {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .google-preview {
+            font-family: Arial, sans-serif;
+        }
+
+        .google-url {
+            font-size: 12px;
+            color: #202124;
+            margin-bottom: 4px;
+        }
+
+        .google-url span {
+            color: #5f6368;
+        }
+
+        .google-title {
+            font-size: 20px;
             color: #1a0dab;
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
+            margin-bottom: 4px;
             cursor: pointer;
         }
 
-        .preview-title:hover {
+        .google-title:hover {
             text-decoration: underline;
         }
 
-        .preview-url {
-            color: #006621;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .preview-desc {
-            color: #545454;
-            font-size: 0.9rem;
+        .google-desc {
+            font-size: 14px;
+            color: #4d5156;
             line-height: 1.5;
         }
 
-        .score-bar {
-            display: flex;
+        .social-previews {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
+            margin-top: 1rem;
         }
 
-        .score-item {
-            background: var(--bg-card);
+        .social-card {
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 1rem;
-            flex: 1;
-            min-width: 150px;
-            text-align: center;
+        }
+
+        .social-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-preview-box {
+            background: #1a1a2e;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .social-image {
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-content {
+            padding: 0.75rem;
+        }
+
+        .social-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .social-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .score-section {
+            margin-top: 2rem;
+        }
+
+        .score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
         }
 
         .score-value {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 800;
         }
 
         .score-value.good {
-            color: var(--success);
+            color: var(--primary);
         }
 
         .score-value.warning {
             color: var(--warning);
         }
 
-        .score-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        .score-value.danger {
+            color: var(--danger);
         }
 
-        .code-block {
-            background: #1e1e3f;
+        .score-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .score-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .score-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        .score-icon.pass {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--primary);
+        }
+
+        .score-icon.fail {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .score-icon.warn {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .score-text {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            padding: 0.85rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .schema-output {
+            background: #0d0d1a;
+            border: 1px solid var(--border);
             border-radius: 10px;
             padding: 1rem;
-            margin-top: 1rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #a5f3fc;
             overflow-x: auto;
+            max-height: 300px;
         }
 
-        .code-block code {
-            color: #22d3ee;
-            font-size: 0.85rem;
-            white-space: pre;
+        .actions-bar {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
         footer {
@@ -257,132 +415,247 @@
             color: var(--text-muted);
         }
 
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-previews {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="bg-gradient"></div>
+
     <header>
         <div class="logo"><i class="fas fa-tags"></i><span>SEOForge</span></div>
+        <div style="display: flex; gap: 1rem;">
+            <button class="btn btn-outline"><i class="fas fa-file-import"></i> Bulk Import</button>
+            <button class="btn btn-primary"><i class="fas fa-download"></i> Export All</button>
+        </div>
     </header>
+
     <main class="container">
-        <section class="hero">
-            <h1>Meta Tag Generator</h1>
-            <p>Generate SEO-optimized meta tags for your Shopify products</p>
-        </section>
-        <div class="card">
-            <div class="form-group">
-                <label>Page Title</label>
-                <input type="text" id="pageTitle" placeholder="e.g., Premium Wireless Headphones - Free Shipping"
-                    oninput="updatePreview()">
-                <div class="char-count" id="titleCount">0/60 characters</div>
-            </div>
-            <div class="form-group">
-                <label>Meta Description</label>
-                <textarea id="metaDesc" rows="3" placeholder="Describe your page in 150-160 characters..."
-                    oninput="updatePreview()"></textarea>
-                <div class="char-count" id="descCount">0/160 characters</div>
-            </div>
-            <div class="form-group">
-                <label>Target Keywords (comma separated)</label>
-                <input type="text" id="keywords" placeholder="e.g., wireless headphones, bluetooth, noise cancelling">
-            </div>
-            <div class="form-group">
-                <label>Page URL</label>
-                <input type="text" id="pageUrl" placeholder="https://yourstore.com/products/headphones"
-                    oninput="updatePreview()">
-            </div>
-            <button class="btn btn-primary" onclick="generateTags()"><i class="fas fa-code"></i> Generate Meta
-                Tags</button>
+        <div class="tabs">
+            <button class="tab active">Meta Tags</button>
+            <button class="tab">Schema Markup</button>
+            <button class="tab">Open Graph</button>
+            <button class="tab">Twitter Cards</button>
         </div>
-        <div class="preview-section">
-            <h3 style="margin-bottom: 1rem;">📱 Google Preview</h3>
-            <div class="preview-card">
-                <div class="preview-title" id="previewTitle">Your Page Title Here</div>
-                <div class="preview-url" id="previewUrl">yourstore.com › products</div>
-                <div class="preview-desc" id="previewDesc">Your meta description will appear here. Make it compelling to
-                    increase click-through rates.</div>
+
+        <div class="main-grid">
+            <div>
+                <div class="card">
+                    <h3><i class="fas fa-edit"></i> Meta Tag Editor</h3>
+                    <div class="form-group">
+                        <label>Page URL<span class="char-count" id="urlCount">0 chars</span></label>
+                        <input type="url" id="pageUrl" placeholder="https://yourstore.com/products/example"
+                            oninput="updatePreview()">
+                    </div>
+                    <div class="form-group">
+                        <label>Meta Title<span class="char-count" id="titleCount">0/60</span></label>
+                        <input type="text" id="metaTitle" placeholder="Premium Wireless Headphones | YourStore"
+                            oninput="updatePreview()" maxlength="70">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="titleProgress"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Meta Description<span class="char-count" id="descCount">0/160</span></label>
+                        <textarea id="metaDesc" rows="3"
+                            placeholder="Shop our premium wireless headphones with 40-hour battery life and active noise cancellation. Free shipping on orders over $50."
+                            oninput="updatePreview()" maxlength="170"></textarea>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="descProgress"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Focus Keywords</label>
+                        <input type="text" id="keywords"
+                            placeholder="wireless headphones, noise cancelling, premium audio"
+                            oninput="updatePreview()">
+                    </div>
+                    <div class="actions-bar">
+                        <button class="btn btn-primary" onclick="copyTags()"><i class="fas fa-copy"></i> Copy
+                            Tags</button>
+                        <button class="btn btn-outline" onclick="generateSchema()"><i class="fas fa-code"></i> Generate
+                            Schema</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 1.5rem;">
+                    <h3><i class="fas fa-code"></i> Schema Markup (JSON-LD)</h3>
+                    <pre class="schema-output" id="schemaOutput">{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Premium Wireless Headphones",
+  "description": "Shop our premium wireless headphones...",
+  "brand": "YourStore",
+  "offers": {
+    "@type": "Offer",
+    "price": "99.99",
+    "priceCurrency": "USD"
+  }
+}</pre>
+                </div>
             </div>
-            <div class="score-bar">
-                <div class="score-item">
-                    <div class="score-value good" id="titleScore">-</div>
-                    <div class="score-label">Title Score</div>
+
+            <div>
+                <div class="card">
+                    <h3><i class="fab fa-google"></i> Google Preview</h3>
+                    <div class="preview-card">
+                        <div class="google-preview">
+                            <div class="google-url" id="previewUrl">yourstore.com <span>› products › example</span>
+                            </div>
+                            <div class="google-title" id="previewTitle">Premium Wireless Headphones | YourStore</div>
+                            <div class="google-desc" id="previewDesc">Shop our premium wireless headphones with 40-hour
+                                battery life and active noise cancellation. Free shipping on orders over $50.</div>
+                        </div>
+                    </div>
+
+                    <div class="social-previews">
+                        <div class="social-card">
+                            <div class="social-label"><i class="fab fa-facebook"></i> Facebook</div>
+                            <div class="social-preview-box">
+                                <div class="social-image"><i class="fas fa-image"
+                                        style="font-size: 2rem; opacity: 0.5;"></i></div>
+                                <div class="social-content">
+                                    <div class="social-title" id="fbTitle">Premium Wireless Headphones</div>
+                                    <div class="social-desc" id="fbDesc">Shop our premium wireless headphones...</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="social-card">
+                            <div class="social-label"><i class="fab fa-twitter"></i> Twitter</div>
+                            <div class="social-preview-box">
+                                <div class="social-image"><i class="fas fa-image"
+                                        style="font-size: 2rem; opacity: 0.5;"></i></div>
+                                <div class="social-content">
+                                    <div class="social-title" id="twTitle">Premium Wireless Headphones</div>
+                                    <div class="social-desc" id="twDesc">Shop our premium wireless headphones...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="score-item">
-                    <div class="score-value good" id="descScore">-</div>
-                    <div class="score-label">Description Score</div>
-                </div>
-                <div class="score-item">
-                    <div class="score-value good" id="overallScore">-</div>
-                    <div class="score-label">Overall SEO</div>
+
+                <div class="card score-section">
+                    <div class="score-header">
+                        <h3 style="margin: 0;"><i class="fas fa-chart-line"></i> SEO Score</h3>
+                        <div class="score-value good" id="seoScore">85%</div>
+                    </div>
+                    <div class="score-items" id="scoreItems">
+                        <div class="score-item">
+                            <div class="score-icon pass"><i class="fas fa-check"></i></div><span
+                                class="score-text">Title length is optimal (35 chars)</span>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-icon pass"><i class="fas fa-check"></i></div><span
+                                class="score-text">Description includes focus keyword</span>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-icon warn"><i class="fas fa-exclamation"></i></div><span
+                                class="score-text">Consider adding more keywords</span>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-icon pass"><i class="fas fa-check"></i></div><span class="score-text">URL
+                                structure is SEO-friendly</span>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-icon fail"><i class="fas fa-times"></i></div><span class="score-text">No
+                                OG image specified</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="codeOutput" style="display: none;">
-            <h3 style="margin: 2rem 0 1rem;">📋 Generated Meta Tags</h3>
-            <div class="code-block"><code id="metaCode"></code></div>
-            <button class="btn btn-primary" style="margin-top: 1rem;" onclick="copyCode()"><i class="fas fa-copy"></i>
-                Copy to Clipboard</button>
         </div>
     </main>
+
     <footer>
         <p>Part of the <a href="#">ShopifyHero Tools</a> suite</p>
     </footer>
+
     <script>
         function updatePreview() {
-            const title = document.getElementById('pageTitle').value || 'Your Page Title Here';
-            const desc = document.getElementById('metaDesc').value || 'Your meta description will appear here.';
-            const url = document.getElementById('pageUrl').value || 'yourstore.com › products';
+            const url = document.getElementById('pageUrl').value || 'yourstore.com/products/example';
+            const title = document.getElementById('metaTitle').value || 'Your Page Title';
+            const desc = document.getElementById('metaDesc').value || 'Your page description will appear here...';
+
+            // Update counts
+            document.getElementById('urlCount').textContent = url.length + ' chars';
+            updateCount('titleCount', title.length, 60);
+            updateCount('descCount', desc.length, 160);
+            updateProgress('titleProgress', title.length, 60);
+            updateProgress('descProgress', desc.length, 160);
+
+            // Update previews
+            const urlParts = url.replace(/https?:\/\//, '').split('/');
+            document.getElementById('previewUrl').innerHTML = urlParts[0] + ' <span>› ' + urlParts.slice(1).join(' › ') + '</span>';
             document.getElementById('previewTitle').textContent = title;
             document.getElementById('previewDesc').textContent = desc;
-            document.getElementById('previewUrl').textContent = url.replace('https://', '').replace('http://', '');
-            const titleLen = document.getElementById('pageTitle').value.length;
-            const descLen = document.getElementById('metaDesc').value.length;
-            document.getElementById('titleCount').textContent = `${titleLen}/60 characters`;
-            document.getElementById('titleCount').className = 'char-count' + (titleLen > 60 ? ' danger' : titleLen > 50 ? ' warning' : '');
-            document.getElementById('descCount').textContent = `${descLen}/160 characters`;
-            document.getElementById('descCount').className = 'char-count' + (descLen > 160 ? ' danger' : descLen > 140 ? ' warning' : '');
-            const titleScore = titleLen >= 30 && titleLen <= 60 ? 100 : titleLen < 30 ? 60 : 70;
-            const descScore = descLen >= 120 && descLen <= 160 ? 100 : descLen < 120 ? 60 : 70;
-            document.getElementById('titleScore').textContent = titleScore;
-            document.getElementById('titleScore').className = 'score-value ' + (titleScore >= 80 ? 'good' : 'warning');
-            document.getElementById('descScore').textContent = descScore;
-            document.getElementById('descScore').className = 'score-value ' + (descScore >= 80 ? 'good' : 'warning');
-            document.getElementById('overallScore').textContent = Math.round((titleScore + descScore) / 2);
+            document.getElementById('fbTitle').textContent = title.split('|')[0].trim();
+            document.getElementById('fbDesc').textContent = desc.substring(0, 50) + '...';
+            document.getElementById('twTitle').textContent = title.split('|')[0].trim();
+            document.getElementById('twDesc').textContent = desc.substring(0, 50) + '...';
+
+            updateScore();
         }
-        function generateTags() {
-            const title = document.getElementById('pageTitle').value;
+
+        function updateCount(id, current, max) {
+            const el = document.getElementById(id);
+            el.textContent = `${current}/${max}`;
+            el.className = 'char-count ' + (current > max ? 'danger' : current > max * 0.9 ? 'warning' : 'good');
+        }
+
+        function updateProgress(id, current, max) {
+            const el = document.getElementById(id);
+            const percent = Math.min((current / max) * 100, 100);
+            el.style.width = percent + '%';
+            el.style.background = current > max ? 'var(--danger)' : current > max * 0.9 ? 'var(--warning)' : 'var(--primary)';
+        }
+
+        function updateScore() {
+            const title = document.getElementById('metaTitle').value;
             const desc = document.getElementById('metaDesc').value;
-            const keywords = document.getElementById('keywords').value;
-            const url = document.getElementById('pageUrl').value;
-            if (!title || !desc) { alert('Please fill in title and description'); return; }
-            const code = `<!-- SEO Meta Tags - Generated by SEOForge -->
-<title>${title}</title>
-<meta name="description" content="${desc}">
-<meta name="keywords" content="${keywords}">
-<link rel="canonical" href="${url}">
+            let score = 0;
 
-<!-- Open Graph / Facebook -->
-<meta property="og:title" content="${title}">
-<meta property="og:description" content="${desc}">
-<meta property="og:url" content="${url}">
-<meta property="og:type" content="product">
+            if (title.length >= 30 && title.length <= 60) score += 25;
+            if (desc.length >= 120 && desc.length <= 160) score += 25;
+            if (document.getElementById('keywords').value) score += 20;
+            if (document.getElementById('pageUrl').value) score += 15;
+            score += 15; // Base
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="${title}">
-<meta name="twitter:description" content="${desc}">`;
-            document.getElementById('metaCode').textContent = code;
-            document.getElementById('codeOutput').style.display = 'block';
+            const scoreEl = document.getElementById('seoScore');
+            scoreEl.textContent = score + '%';
+            scoreEl.className = 'score-value ' + (score >= 80 ? 'good' : score >= 60 ? 'warning' : 'danger');
         }
-        function copyCode() {
-            navigator.clipboard.writeText(document.getElementById('metaCode').textContent);
-            alert('Copied to clipboard!');
+
+        function copyTags() {
+            const title = document.getElementById('metaTitle').value;
+            const desc = document.getElementById('metaDesc').value;
+            const tags = `<title>${title}</title>\n<meta name="description" content="${desc}">`;
+            navigator.clipboard.writeText(tags);
+            alert('Meta tags copied to clipboard!');
         }
+
+        function generateSchema() {
+            const title = document.getElementById('metaTitle').value.split('|')[0].trim();
+            const desc = document.getElementById('metaDesc').value;
+            const schema = {
+                "@context": "https://schema.org",
+                "@type": "Product",
+                "name": title,
+                "description": desc,
+                "brand": "YourStore",
+                "offers": { "@type": "Offer", "price": "99.99", "priceCurrency": "USD" }
+            };
+            document.getElementById('schemaOutput').textContent = JSON.stringify(schema, null, 2);
+        }
+
+        updatePreview();
     </script>
 </body>
 
