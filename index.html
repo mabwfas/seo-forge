@@ -12,7 +12,6 @@
         :root {
             --primary: #10b981;
             --primary-dark: #059669;
-            --secondary: #8b5cf6;
             --warning: #f59e0b;
             --danger: #ef4444;
             --bg-dark: #0f0f23;
@@ -86,6 +85,7 @@
             border: 1px solid var(--border);
             border-radius: 20px;
             padding: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .card h3 {
@@ -111,12 +111,13 @@
             font-size: 0.9rem;
         }
 
-        .form-group label span {
-            color: var(--text-muted);
-        }
-
         .char-count {
             font-size: 0.8rem;
+            transition: color 0.3s;
+        }
+
+        .char-count.good {
+            color: var(--primary);
         }
 
         .char-count.warning {
@@ -125,10 +126,6 @@
 
         .char-count.danger {
             color: var(--danger);
-        }
-
-        .char-count.good {
-            color: var(--primary);
         }
 
         input,
@@ -166,23 +163,11 @@
             transition: width 0.3s, background 0.3s;
         }
 
-        .preview-section {
-            margin-top: 2rem;
-        }
-
         .preview-card {
             background: #fff;
             border-radius: 12px;
             padding: 1.25rem;
             color: #1a1a2e;
-        }
-
-        .preview-label {
-            font-size: 0.75rem;
-            color: #666;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .google-preview {
@@ -195,15 +180,13 @@
             margin-bottom: 4px;
         }
 
-        .google-url span {
-            color: #5f6368;
-        }
-
         .google-title {
             font-size: 20px;
             color: #1a0dab;
             margin-bottom: 4px;
             cursor: pointer;
+            text-decoration: none;
+            display: block;
         }
 
         .google-title:hover {
@@ -216,60 +199,8 @@
             line-height: 1.5;
         }
 
-        .social-previews {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem;
-        }
-
-        .social-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .social-preview-box {
-            background: #1a1a2e;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .social-image {
-            height: 100px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .social-content {
-            padding: 0.75rem;
-        }
-
-        .social-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .social-desc {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
         .score-section {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .score-header {
@@ -299,7 +230,7 @@
         .score-items {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
 
         .score-item {
@@ -336,16 +267,11 @@
             color: var(--warning);
         }
 
-        .score-text {
-            flex: 1;
-            font-size: 0.9rem;
-        }
-
         .btn {
-            padding: 0.85rem 1.5rem;
+            padding: 0.75rem 1.25rem;
             border: none;
             border-radius: 10px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             display: inline-flex;
@@ -359,39 +285,20 @@
             color: #fff;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-        }
-
         .btn-outline {
             background: transparent;
             border: 1px solid var(--border);
             color: var(--text);
         }
 
-        .tabs {
+        .actions-bar {
             display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .tab {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: transparent;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-
-        .tab.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: #fff;
-        }
-
-        .schema-output {
+        .code-output {
             background: #0d0d1a;
             border: 1px solid var(--border);
             border-radius: 10px;
@@ -400,13 +307,29 @@
             font-size: 0.8rem;
             color: #a5f3fc;
             overflow-x: auto;
-            max-height: 300px;
+            max-height: 200px;
+            white-space: pre-wrap;
         }
 
-        .actions-bar {
+        .saved-list {
+            margin-top: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .saved-item {
             display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+
+        .saved-item:hover {
+            background: rgba(255, 255, 255, 0.05);
         }
 
         footer {
@@ -419,10 +342,6 @@
             .main-grid {
                 grid-template-columns: 1fr;
             }
-
-            .social-previews {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -433,30 +352,23 @@
     <header>
         <div class="logo"><i class="fas fa-tags"></i><span>SEOForge</span></div>
         <div style="display: flex; gap: 1rem;">
-            <button class="btn btn-outline"><i class="fas fa-file-import"></i> Bulk Import</button>
-            <button class="btn btn-primary"><i class="fas fa-download"></i> Export All</button>
+            <button class="btn btn-outline" onclick="clearAll()"><i class="fas fa-trash"></i> Clear</button>
+            <button class="btn btn-primary" onclick="copyAllTags()"><i class="fas fa-copy"></i> Copy All Tags</button>
         </div>
     </header>
 
     <main class="container">
-        <div class="tabs">
-            <button class="tab active">Meta Tags</button>
-            <button class="tab">Schema Markup</button>
-            <button class="tab">Open Graph</button>
-            <button class="tab">Twitter Cards</button>
-        </div>
-
         <div class="main-grid">
             <div>
                 <div class="card">
                     <h3><i class="fas fa-edit"></i> Meta Tag Editor</h3>
                     <div class="form-group">
-                        <label>Page URL<span class="char-count" id="urlCount">0 chars</span></label>
+                        <label>Page URL <span class="char-count" id="urlCount">0 chars</span></label>
                         <input type="url" id="pageUrl" placeholder="https://yourstore.com/products/example"
                             oninput="updatePreview()">
                     </div>
                     <div class="form-group">
-                        <label>Meta Title<span class="char-count" id="titleCount">0/60</span></label>
+                        <label>Meta Title <span class="char-count" id="titleCount">0/60</span></label>
                         <input type="text" id="metaTitle" placeholder="Premium Wireless Headphones | YourStore"
                             oninput="updatePreview()" maxlength="70">
                         <div class="progress-bar">
@@ -464,42 +376,39 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Meta Description<span class="char-count" id="descCount">0/160</span></label>
+                        <label>Meta Description <span class="char-count" id="descCount">0/160</span></label>
                         <textarea id="metaDesc" rows="3"
-                            placeholder="Shop our premium wireless headphones with 40-hour battery life and active noise cancellation. Free shipping on orders over $50."
+                            placeholder="Shop our premium wireless headphones with 40-hour battery life..."
                             oninput="updatePreview()" maxlength="170"></textarea>
                         <div class="progress-bar">
                             <div class="progress-fill" id="descProgress"></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Focus Keywords</label>
+                        <label>Focus Keywords (comma-separated)</label>
                         <input type="text" id="keywords"
                             placeholder="wireless headphones, noise cancelling, premium audio"
                             oninput="updatePreview()">
                     </div>
+                    <div class="form-group">
+                        <label>OG Image URL (Optional)</label>
+                        <input type="url" id="ogImage" placeholder="https://yourstore.com/images/product.jpg"
+                            oninput="updatePreview()">
+                    </div>
                     <div class="actions-bar">
-                        <button class="btn btn-primary" onclick="copyTags()"><i class="fas fa-copy"></i> Copy
-                            Tags</button>
+                        <button class="btn btn-primary" onclick="saveMetaTags()"><i class="fas fa-save"></i>
+                            Save</button>
                         <button class="btn btn-outline" onclick="generateSchema()"><i class="fas fa-code"></i> Generate
                             Schema</button>
                     </div>
                 </div>
 
-                <div class="card" style="margin-top: 1.5rem;">
-                    <h3><i class="fas fa-code"></i> Schema Markup (JSON-LD)</h3>
-                    <pre class="schema-output" id="schemaOutput">{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Premium Wireless Headphones",
-  "description": "Shop our premium wireless headphones...",
-  "brand": "YourStore",
-  "offers": {
-    "@type": "Offer",
-    "price": "99.99",
-    "priceCurrency": "USD"
-  }
-}</pre>
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Generated HTML</h3>
+                    <div class="code-output" id="codeOutput">&lt;!-- Enter details above to generate meta tags --&gt;
+                    </div>
+                    <button class="btn btn-outline" onclick="copyCode()" style="margin-top: 1rem;"><i
+                            class="fas fa-copy"></i> Copy HTML</button>
                 </div>
             </div>
 
@@ -508,36 +417,10 @@
                     <h3><i class="fab fa-google"></i> Google Preview</h3>
                     <div class="preview-card">
                         <div class="google-preview">
-                            <div class="google-url" id="previewUrl">yourstore.com <span>› products › example</span>
-                            </div>
-                            <div class="google-title" id="previewTitle">Premium Wireless Headphones | YourStore</div>
-                            <div class="google-desc" id="previewDesc">Shop our premium wireless headphones with 40-hour
-                                battery life and active noise cancellation. Free shipping on orders over $50.</div>
-                        </div>
-                    </div>
-
-                    <div class="social-previews">
-                        <div class="social-card">
-                            <div class="social-label"><i class="fab fa-facebook"></i> Facebook</div>
-                            <div class="social-preview-box">
-                                <div class="social-image"><i class="fas fa-image"
-                                        style="font-size: 2rem; opacity: 0.5;"></i></div>
-                                <div class="social-content">
-                                    <div class="social-title" id="fbTitle">Premium Wireless Headphones</div>
-                                    <div class="social-desc" id="fbDesc">Shop our premium wireless headphones...</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="social-card">
-                            <div class="social-label"><i class="fab fa-twitter"></i> Twitter</div>
-                            <div class="social-preview-box">
-                                <div class="social-image"><i class="fas fa-image"
-                                        style="font-size: 2rem; opacity: 0.5;"></i></div>
-                                <div class="social-content">
-                                    <div class="social-title" id="twTitle">Premium Wireless Headphones</div>
-                                    <div class="social-desc" id="twDesc">Shop our premium wireless headphones...</div>
-                                </div>
-                            </div>
+                            <div class="google-url" id="previewUrl">yourstore.com › products › example</div>
+                            <a class="google-title" id="previewTitle">Your Page Title | Site Name</a>
+                            <div class="google-desc" id="previewDesc">Your meta description will appear here. Make it
+                                compelling to increase click-through rates from search results.</div>
                         </div>
                     </div>
                 </div>
@@ -545,63 +428,60 @@
                 <div class="card score-section">
                     <div class="score-header">
                         <h3 style="margin: 0;"><i class="fas fa-chart-line"></i> SEO Score</h3>
-                        <div class="score-value good" id="seoScore">85%</div>
+                        <div class="score-value" id="seoScore">0%</div>
                     </div>
-                    <div class="score-items" id="scoreItems">
-                        <div class="score-item">
-                            <div class="score-icon pass"><i class="fas fa-check"></i></div><span
-                                class="score-text">Title length is optimal (35 chars)</span>
-                        </div>
-                        <div class="score-item">
-                            <div class="score-icon pass"><i class="fas fa-check"></i></div><span
-                                class="score-text">Description includes focus keyword</span>
-                        </div>
-                        <div class="score-item">
-                            <div class="score-icon warn"><i class="fas fa-exclamation"></i></div><span
-                                class="score-text">Consider adding more keywords</span>
-                        </div>
-                        <div class="score-item">
-                            <div class="score-icon pass"><i class="fas fa-check"></i></div><span class="score-text">URL
-                                structure is SEO-friendly</span>
-                        </div>
-                        <div class="score-item">
-                            <div class="score-icon fail"><i class="fas fa-times"></i></div><span class="score-text">No
-                                OG image specified</span>
-                        </div>
+                    <div class="score-items" id="scoreItems"></div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-bookmark"></i> Saved Tags</h3>
+                    <div class="saved-list" id="savedList">
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">No saved tags yet</p>
                     </div>
+                    <button class="btn btn-outline" onclick="exportSaved()" style="margin-top: 1rem;"><i
+                            class="fas fa-download"></i> Export All</button>
                 </div>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>Part of the <a href="#">ShopifyHero Tools</a> suite</p>
+        <p>SEOForge - Professional Meta Tag Generator</p>
     </footer>
 
     <script>
+        let savedTags = JSON.parse(localStorage.getItem('seoForgeTags') || '[]');
+
         function updatePreview() {
             const url = document.getElementById('pageUrl').value || 'yourstore.com/products/example';
-            const title = document.getElementById('metaTitle').value || 'Your Page Title';
-            const desc = document.getElementById('metaDesc').value || 'Your page description will appear here...';
+            const title = document.getElementById('metaTitle').value || 'Your Page Title | Site Name';
+            const desc = document.getElementById('metaDesc').value || 'Your meta description will appear here...';
+            const keywords = document.getElementById('keywords').value;
+            const ogImage = document.getElementById('ogImage').value;
 
             // Update counts
             document.getElementById('urlCount').textContent = url.length + ' chars';
             updateCount('titleCount', title.length, 60);
             updateCount('descCount', desc.length, 160);
-            updateProgress('titleProgress', title.length, 60);
-            updateProgress('descProgress', desc.length, 160);
+            updateProgress('titleProgress', title === 'Your Page Title | Site Name' ? 0 : title.length, 60);
+            updateProgress('descProgress', desc === 'Your meta description will appear here...' ? 0 : desc.length, 160);
 
-            // Update previews
-            const urlParts = url.replace(/https?:\/\//, '').split('/');
-            document.getElementById('previewUrl').innerHTML = urlParts[0] + ' <span>› ' + urlParts.slice(1).join(' › ') + '</span>';
+            // Update Google preview
+            try {
+                const urlObj = new URL(url.startsWith('http') ? url : 'https://' + url);
+                const pathParts = urlObj.pathname.split('/').filter(p => p);
+                document.getElementById('previewUrl').textContent = urlObj.hostname + (pathParts.length ? ' › ' + pathParts.join(' › ') : '');
+            } catch {
+                document.getElementById('previewUrl').textContent = url.replace(/https?:\/\//, '').replace(/\//g, ' › ');
+            }
             document.getElementById('previewTitle').textContent = title;
-            document.getElementById('previewDesc').textContent = desc;
-            document.getElementById('fbTitle').textContent = title.split('|')[0].trim();
-            document.getElementById('fbDesc').textContent = desc.substring(0, 50) + '...';
-            document.getElementById('twTitle').textContent = title.split('|')[0].trim();
-            document.getElementById('twDesc').textContent = desc.substring(0, 50) + '...';
+            document.getElementById('previewDesc').textContent = desc.length > 160 ? desc.substring(0, 157) + '...' : desc;
 
-            updateScore();
+            // Generate HTML
+            generateHTML(title, desc, keywords, ogImage, url);
+
+            // Update SEO score
+            updateSeoScore(title, desc, keywords, ogImage, url);
         }
 
         function updateCount(id, current, max) {
@@ -617,28 +497,133 @@
             el.style.background = current > max ? 'var(--danger)' : current > max * 0.9 ? 'var(--warning)' : 'var(--primary)';
         }
 
-        function updateScore() {
-            const title = document.getElementById('metaTitle').value;
-            const desc = document.getElementById('metaDesc').value;
-            let score = 0;
+        function generateHTML(title, desc, keywords, ogImage, url) {
+            const tags = [];
+            if (title && title !== 'Your Page Title | Site Name') tags.push(`<title>${escapeHtml(title)}</title>`);
+            if (desc && desc !== 'Your meta description will appear here...') tags.push(`<meta name="description" content="${escapeHtml(desc)}">`);
+            if (keywords) tags.push(`<meta name="keywords" content="${escapeHtml(keywords)}">`);
+            if (url) tags.push(`<link rel="canonical" href="${escapeHtml(url)}">`);
 
-            if (title.length >= 30 && title.length <= 60) score += 25;
-            if (desc.length >= 120 && desc.length <= 160) score += 25;
-            if (document.getElementById('keywords').value) score += 20;
-            if (document.getElementById('pageUrl').value) score += 15;
-            score += 15; // Base
+            // Open Graph
+            if (title) tags.push(`<meta property="og:title" content="${escapeHtml(title.split('|')[0].trim())}">`);
+            if (desc) tags.push(`<meta property="og:description" content="${escapeHtml(desc)}">`);
+            if (ogImage) tags.push(`<meta property="og:image" content="${escapeHtml(ogImage)}">`);
+            if (url) tags.push(`<meta property="og:url" content="${escapeHtml(url)}">`);
+            tags.push(`<meta property="og:type" content="product">`);
 
-            const scoreEl = document.getElementById('seoScore');
-            scoreEl.textContent = score + '%';
-            scoreEl.className = 'score-value ' + (score >= 80 ? 'good' : score >= 60 ? 'warning' : 'danger');
+            // Twitter
+            tags.push(`<meta name="twitter:card" content="summary_large_image">`);
+            if (title) tags.push(`<meta name="twitter:title" content="${escapeHtml(title.split('|')[0].trim())}">`);
+            if (desc) tags.push(`<meta name="twitter:description" content="${escapeHtml(desc)}">`);
+            if (ogImage) tags.push(`<meta name="twitter:image" content="${escapeHtml(ogImage)}">`);
+
+            document.getElementById('codeOutput').textContent = tags.length > 0 ? tags.join('\n') : '<!-- Enter details above to generate meta tags -->';
         }
 
-        function copyTags() {
+        function escapeHtml(text) {
+            return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function updateSeoScore(title, desc, keywords, ogImage, url) {
+            const checks = [];
+            let score = 0;
+
+            // Title checks
+            const titleLen = title.length;
+            if (titleLen >= 30 && titleLen <= 60) { checks.push({ pass: true, text: `Title length optimal (${titleLen} chars)` }); score += 20; }
+            else if (titleLen > 0) { checks.push({ pass: false, warn: titleLen > 60, text: `Title ${titleLen > 60 ? 'too long' : 'too short'} (${titleLen} chars)` }); score += 10; }
+            else { checks.push({ pass: false, text: 'No title provided' }); }
+
+            // Description checks
+            const descLen = desc.length;
+            if (descLen >= 120 && descLen <= 160) { checks.push({ pass: true, text: `Description length optimal (${descLen} chars)` }); score += 20; }
+            else if (descLen > 0) { checks.push({ pass: false, warn: true, text: `Description ${descLen > 160 ? 'too long' : 'could be longer'} (${descLen} chars)` }); score += 10; }
+            else { checks.push({ pass: false, text: 'No description provided' }); }
+
+            // Keywords check
+            if (keywords && keywords.split(',').length >= 2) { checks.push({ pass: true, text: `Keywords provided (${keywords.split(',').length})` }); score += 15; }
+            else if (keywords) { checks.push({ pass: false, warn: true, text: 'Consider adding more keywords' }); score += 5; }
+            else { checks.push({ pass: false, text: 'No keywords provided' }); }
+
+            // Keyword in title/desc
+            if (keywords && title) {
+                const kw = keywords.split(',')[0].trim().toLowerCase();
+                if (title.toLowerCase().includes(kw)) { checks.push({ pass: true, text: 'Primary keyword in title' }); score += 15; }
+                else { checks.push({ pass: false, warn: true, text: 'Add primary keyword to title' }); }
+            }
+
+            // URL check
+            if (url && url.startsWith('https')) { checks.push({ pass: true, text: 'URL uses HTTPS' }); score += 10; }
+            else if (url) { checks.push({ pass: false, text: 'URL should use HTTPS' }); }
+
+            // OG Image check
+            if (ogImage) { checks.push({ pass: true, text: 'OG Image provided' }); score += 20; }
+            else { checks.push({ pass: false, warn: true, text: 'Consider adding OG Image' }); }
+
+            // Display score
+            const scoreEl = document.getElementById('seoScore');
+            scoreEl.textContent = score + '%';
+            scoreEl.className = 'score-value ' + (score >= 80 ? 'good' : score >= 50 ? 'warning' : 'danger');
+
+            // Display checks
+            document.getElementById('scoreItems').innerHTML = checks.map(c => `
+                <div class="score-item">
+                    <div class="score-icon ${c.pass ? 'pass' : c.warn ? 'warn' : 'fail'}">
+                        <i class="fas ${c.pass ? 'fa-check' : c.warn ? 'fa-exclamation' : 'fa-times'}"></i>
+                    </div>
+                    <span>${c.text}</span>
+                </div>
+            `).join('');
+        }
+
+        function saveMetaTags() {
             const title = document.getElementById('metaTitle').value;
             const desc = document.getElementById('metaDesc').value;
-            const tags = `<title>${title}</title>\n<meta name="description" content="${desc}">`;
-            navigator.clipboard.writeText(tags);
-            alert('Meta tags copied to clipboard!');
+            const url = document.getElementById('pageUrl').value;
+
+            if (!title) { alert('Please enter a meta title'); return; }
+
+            savedTags.unshift({ title, desc, url, keywords: document.getElementById('keywords').value, ogImage: document.getElementById('ogImage').value, date: new Date().toISOString() });
+            if (savedTags.length > 20) savedTags.pop();
+            localStorage.setItem('seoForgeTags', JSON.stringify(savedTags));
+            renderSaved();
+            alert('Meta tags saved!');
+        }
+
+        function renderSaved() {
+            const list = document.getElementById('savedList');
+            if (savedTags.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No saved tags yet</p>';
+            } else {
+                list.innerHTML = savedTags.map((t, i) => `
+                    <div class="saved-item" onclick="loadSaved(${i})">
+                        <span style="font-size: 0.9rem;">${t.title.substring(0, 30)}${t.title.length > 30 ? '...' : ''}</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">${new Date(t.date).toLocaleDateString()}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function loadSaved(index) {
+            const t = savedTags[index];
+            document.getElementById('metaTitle').value = t.title;
+            document.getElementById('metaDesc').value = t.desc;
+            document.getElementById('pageUrl').value = t.url;
+            document.getElementById('keywords').value = t.keywords;
+            document.getElementById('ogImage').value = t.ogImage || '';
+            updatePreview();
+        }
+
+        function copyCode() {
+            navigator.clipboard.writeText(document.getElementById('codeOutput').textContent);
+            alert('HTML copied to clipboard!');
+        }
+
+        function copyAllTags() { copyCode(); }
+
+        function clearAll() {
+            ['metaTitle', 'metaDesc', 'pageUrl', 'keywords', 'ogImage'].forEach(id => document.getElementById(id).value = '');
+            updatePreview();
         }
 
         function generateSchema() {
@@ -647,14 +632,23 @@
             const schema = {
                 "@context": "https://schema.org",
                 "@type": "Product",
-                "name": title,
-                "description": desc,
-                "brand": "YourStore",
-                "offers": { "@type": "Offer", "price": "99.99", "priceCurrency": "USD" }
+                "name": title || "Product Name",
+                "description": desc || "Product description",
+                "brand": { "@type": "Brand", "name": "Your Brand" },
+                "offers": { "@type": "Offer", "price": "99.99", "priceCurrency": "USD", "availability": "https://schema.org/InStock" }
             };
-            document.getElementById('schemaOutput').textContent = JSON.stringify(schema, null, 2);
+            document.getElementById('codeOutput').textContent = '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\/script>';
         }
 
+        function exportSaved() {
+            const blob = new Blob([JSON.stringify(savedTags, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'seo-meta-tags.json';
+            a.click();
+        }
+
+        renderSaved();
         updatePreview();
     </script>
 </body>
