@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Generator - SEOForge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="api.js"></script>
+    <style>
+        :root {
+            --primary: #10b981;
+            --bg: #0f0f23;
+            --card: rgba(255, 255, 255, 0.05);
+            --text: #fff;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            background: rgba(15, 15, 35, 0.95);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--muted);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-link:hover {
+            background: var(--card);
+        }
+
+        .nav-link.active {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--primary);
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            margin-top: 0.25rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card);
+            color: var(--text);
+        }
+
+        .form-textarea {
+            min-height: 200px;
+            font-family: monospace;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .code-output {
+            background: #0d0d1a;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            max-height: 300px;
+            overflow: auto;
+            white-space: pre-wrap;
+            color: #a5f3fc;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="logo"><i class="fas fa-hammer"></i> SEOForge</div>
+        <a href="index.html" class="nav-link"><i class="fas fa-tag"></i> Generator</a>
+        <a href="bulk.html" class="nav-link active"><i class="fas fa-list"></i> Bulk</a>
+        <a href="schemas.html" class="nav-link"><i class="fas fa-code"></i> Schemas</a>
+        <a href="analyzer.html" class="nav-link"><i class="fas fa-search"></i> Analyzer</a>
+    </nav>
+
+    <main class="main">
+        <div class="header">
+            <h1 class="title">Bulk Meta Tag Generator</h1>
+            <p class="subtitle">Generate meta tags for multiple pages at once</p>
+        </div>
+
+        <div class="card">
+            <h3 style="margin-bottom: 1rem;"><i class="fas fa-upload" style="color: var(--primary);"></i> Import Pages
+            </h3>
+            <div class="form-group">
+                <label class="form-label">Paste CSV data (URL, Title, Description per line)</label>
+                <textarea class="form-textarea" id="csvInput" placeholder="https://example.com/page1,Page Title,Page description here
+https://example.com/page2,Another Title,Another description"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="generateBulk()"><i class="fas fa-magic"></i> Generate All</button>
+        </div>
+
+        <div class="card" id="resultsCard" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3><i class="fas fa-check-circle" style="color: var(--primary);"></i> Generated Tags</h3>
+                <button class="btn btn-outline" onclick="exportAll()"><i class="fas fa-download"></i> Export
+                    All</button>
+            </div>
+            <div id="resultsTable"></div>
+        </div>
+    </main>
+
+    <script>
+        function generateBulk() {
+            const csv = document.getElementById('csvInput').value.trim();
+            if (!csv) { alert('Please enter CSV data'); return; }
+
+            const lines = csv.split('\n').filter(l => l.trim());
+            const results = lines.map(line => {
+                const [url, title, description] = line.split(',').map(s => s.trim());
+                return { url, title, description, html: ForgeAPI.generateHTML({ url, title, description }) };
+            });
+
+            const container = document.getElementById('resultsTable');
+            container.innerHTML = `
+                <table>
+                    <thead><tr><th>URL</th><th>Title</th><th>Score</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        ${results.map((r, i) => {
+                const score = ForgeAPI.generateSEOScore(r).score;
+                return `<tr>
+                                <td style="font-size: 0.85rem; color: var(--primary);">${r.url}</td>
+                                <td>${r.title}</td>
+                                <td><span style="color: ${score >= 70 ? 'var(--primary)' : '#f59e0b'}">${score}%</span></td>
+                                <td><button class="btn btn-outline" style="padding: 0.4rem 0.8rem;" onclick="copyHTML(${i})"><i class="fas fa-copy"></i></button></td>
+                            </tr>`;
+            }).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            window.bulkResults = results;
+            document.getElementById('resultsCard').style.display = 'block';
+            ForgeAPI.toast.show(`Generated tags for ${results.length} pages!`);
+        }
+
+        function copyHTML(index) {
+            navigator.clipboard.writeText(window.bulkResults[index].html);
+            ForgeAPI.toast.show('HTML copied!');
+        }
+
+        function exportAll() {
+            const html = window.bulkResults.map(r => `<!-- ${r.url} -->\n${r.html}`).join('\n\n');
+            const blob = new Blob([html], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'meta-tags-bulk.html';
+            a.click();
+            ForgeAPI.toast.show('Exported!');
+        }
+    </script>
+</body>
+
+</html>
